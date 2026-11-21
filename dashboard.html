@@ -1,0 +1,300 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Dashboard — Fusion FX Funded&lt;/title&gt;
+  &lt;link rel="stylesheet" href="app.css"&gt;
+  &lt;style&gt;
+    /* Page-specific overrides for dashboard */
+    .mock-label { display: inline-block; margin-left: 0.5rem; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="page-wrapper"&gt;
+    &lt;!-- Dashboard Layout with Sidebar --&gt;
+    &lt;div class="dashboard-layout"&gt;
+
+      &lt;!-- Sidebar --&gt;
+      &lt;aside class="sidebar"&gt;
+        &lt;div class="sidebar-brand"&gt;
+          &lt;div class="site-logo"&gt;
+            &lt;div class="site-logo-icon"&gt;FX&lt;/div&gt;
+            &lt;a href="index.html"&gt;Fusion FX Funded&lt;/a&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;nav class="sidebar-nav"&gt;
+          &lt;div class="sidebar-section-title"&gt;Main&lt;/div&gt;
+          &lt;a href="#" class="active"&gt;📊 Dashboard&lt;/a&gt;
+          &lt;a href="#"&gt;📈 Markets&lt;/a&gt;
+          &lt;a href="#"&gt;📋 Positions&lt;/a&gt;
+          &lt;a href="#"&gt;📜 Trade History&lt;/a&gt;
+
+          &lt;div class="sidebar-section-title"&gt;Account&lt;/div&gt;
+          &lt;a href="#"&gt;⚙️ Settings&lt;/a&gt;
+          &lt;a href="#"&gt;💳 Deposit&lt;/a&gt;
+          &lt;a href="#"&gt;📊 Reports&lt;/a&gt;
+        &lt;/nav&gt;
+
+        &lt;div class="sidebar-footer"&gt;
+          &lt;a href="#" id="logout-btn" class="btn btn-ghost btn-sm" style="width: 100%; justify-content: flex-start; gap: 0.5rem;"&gt;
+            🚪 Sign Out
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/aside&gt;
+
+      &lt;!-- Main Content --&gt;
+      &lt;main class="dashboard-content"&gt;
+
+        &lt;!-- Demo Notice --&gt;
+        &lt;div class="demo-notice"&gt;
+          &lt;span class="demo-notice-icon"&gt;⚠️&lt;/span&gt;
+          &lt;span&gt;&lt;strong&gt;Demo Dashboard&lt;/strong&gt; — All data shown below is sample/mock data for demonstration only. No real trading connection exists. This is a front-end prototype.&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Dashboard Header --&gt;
+        &lt;div class="dashboard-header"&gt;
+          &lt;div&gt;
+            &lt;h1&gt;Dashboard&lt;/h1&gt;
+            &lt;p style="color: var(--text-secondary); font-size: 0.9rem;" id="user-greeting"&gt;Welcome, Trader&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div style="display: flex; align-items: center; gap: 1rem;"&gt;
+            &lt;div class="account-selector"&gt;
+              &lt;label style="font-size: 0.85rem; color: var(--text-secondary);" for="account-selector"&gt;Account:&lt;/label&gt;
+              &lt;select id="account-selector"&gt;
+                &lt;option value="1"&gt;Standard — $100K&lt;/option&gt;
+                &lt;option value="2"&gt;Explorer — $50K&lt;/option&gt;
+                &lt;option value="3"&gt;Pro — $25K&lt;/option&gt;
+              &lt;/select&gt;
+              &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;span class="badge badge-info" id="user-email"&gt;demo@fusionfx.com&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Stats Grid --&gt;
+        &lt;div class="stats-grid"&gt;
+          &lt;div class="stat-card"&gt;
+            &lt;div class="stat-label"&gt;Account Balance&lt;/div&gt;
+            &lt;div class="stat-value" id="demo-balance"&gt;100,000.00&lt;/div&gt;
+            &lt;div class="stat-change" style="color: var(--text-muted);"&gt;USD &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class="stat-card"&gt;
+            &lt;div class="stat-label"&gt;Current Equity&lt;/div&gt;
+            &lt;div class="stat-value positive" id="demo-equity"&gt;101,250.00&lt;/div&gt;
+            &lt;div class="stat-change" style="color: var(--accent-green-light);"&gt;+1.25% &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class="stat-card"&gt;
+            &lt;div class="stat-label"&gt;Total Profit/Loss&lt;/div&gt;
+            &lt;div class="stat-value positive" id="demo-profit"&gt;+1,250.00&lt;/div&gt;
+            &lt;div class="stat-change" style="color: var(--text-muted);"&gt;Today: +$850 &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class="stat-card"&gt;
+            &lt;div class="stat-label"&gt;Win Rate&lt;/div&gt;
+            &lt;div class="stat-value" id="demo-winrate"&gt;62.5%&lt;/div&gt;
+            &lt;div class="stat-change" style="color: var(--text-muted);"&gt;Over 32 trades &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class="stat-card"&gt;
+            &lt;div class="stat-label"&gt;Max Drawdown&lt;/div&gt;
+            &lt;div class="stat-value" id="demo-drawdown"&gt;3.2%&lt;/div&gt;
+            &lt;div class="stat-change" style="color: var(--accent-yellow);"&gt;Limit: 10% &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Two Column Layout --&gt;
+        &lt;div class="two-col"&gt;
+
+          &lt;!-- Recent Trades --&gt;
+          &lt;div class="card"&gt;
+            &lt;div class="card-header"&gt;
+              &lt;div&gt;
+                &lt;div class="card-title"&gt;Recent Trades&lt;/div&gt;
+                &lt;div class="card-subtitle"&gt;Latest 5 positions &lt;span class="mock-label"&gt;MOCK DATA&lt;/span&gt;&lt;/div&gt;
+              &lt;/div&gt;
+              &lt;a href="#" class="btn btn-ghost btn-sm"&gt;View All&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;div class="table-wrapper"&gt;
+              &lt;table class="data-table"&gt;
+                &lt;thead&gt;
+                  &lt;tr&gt;
+                    &lt;th&gt;Pair&lt;/th&gt;
+                    &lt;th&gt;Type&lt;/th&gt;
+                    &lt;th&gt;Size&lt;/th&gt;
+                    &lt;th&gt;Entry&lt;/th&gt;
+                    &lt;th&gt;P/L&lt;/th&gt;
+                    &lt;th&gt;Status&lt;/th&gt;
+                  &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                  &lt;tr&gt;
+                    &lt;td&gt;EUR/USD&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-success"&gt;BUY&lt;/span&gt;&lt;/td&gt;
+                    &lt;td&gt;1.00&lt;/td&gt;
+                    &lt;td&gt;1.08520&lt;/td&gt;
+                    &lt;td style="color: var(--accent-green-light);"&gt;+$420.00&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-success"&gt;Open&lt;/span&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td&gt;GBP/USD&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-danger"&gt;SELL&lt;/span&gt;&lt;/td&gt;
+                    &lt;td&gt;0.50&lt;/td&gt;
+                    &lt;td&gt;1.26340&lt;/td&gt;
+                    &lt;td style="color: var(--accent-green-light);"&gt;+$185.50&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-success"&gt;Closed&lt;/span&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td&gt;USD/JPY&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-success"&gt;BUY&lt;/span&gt;&lt;/td&gt;
+                    &lt;td&gt;0.75&lt;/td&gt;
+                    &lt;td&gt;149.250&lt;/td&gt;
+                    &lt;td style="color: var(--accent-red-light);"&gt;-$310.00&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-success"&gt;Closed&lt;/span&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td&gt;AUD/USD&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-danger"&gt;SELL&lt;/span&gt;&lt;/td&gt;
+                    &lt;td&gt;1.25&lt;/td&gt;
+                    &lt;td&gt;0.65180&lt;/td&gt;
+                    &lt;td style="color: var(--accent-green-light);"&gt;+$560.25&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-success"&gt;Closed&lt;/span&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td&gt;BTC/USD&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-success"&gt;BUY&lt;/span&gt;&lt;/td&gt;
+                    &lt;td&gt;0.10&lt;/td&gt;
+                    &lt;td&gt;43,250.00&lt;/td&gt;
+                    &lt;td style="color: var(--accent-green-light);"&gt;+$285.00&lt;/td&gt;
+                    &lt;td&gt;&lt;span class="badge badge-success"&gt;Closed&lt;/span&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/tbody&gt;
+              &lt;/table&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Right Column --&gt;
+          &lt;div&gt;
+
+            &lt;!-- Objective Progress --&gt;
+            &lt;div class="card" style="margin-bottom: 1.5rem;"&gt;
+              &lt;div class="card-header"&gt;
+                &lt;div class="card-title"&gt;🎯 Challenge Objectives&lt;/div&gt;
+              &lt;/div&gt;
+              &lt;p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;"&gt;
+                Standard Account — Target: 8% profit, Max 10% drawdown
+              &lt;/p&gt;
+
+              &lt;div style="margin-bottom: 1.5rem;"&gt;
+                &lt;div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary);"&gt;
+                  &lt;span&gt;Profit Target&lt;/span&gt;
+                  &lt;span id="objective-progress-label"&gt;2.5% complete&lt;/span&gt;
+                &lt;/div&gt;
+                &lt;div class="progress-bar-container"&gt;
+                  &lt;div class="progress-bar-fill green" id="objective-progress-bar" style="width: 25%;"&gt;&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+
+              &lt;ul class="objective-list"&gt;
+                &lt;li&gt;
+                  &lt;span class="objective-check"&gt;✅&lt;/span&gt;
+                  &lt;span&gt;Consistent profitability (3+ profitable months)&lt;/span&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                  &lt;span class="objective-check"&gt;✅&lt;/span&gt;
+                  &lt;span&gt;8% profit target achieved&lt;/span&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                  &lt;span class="objective-check objective-pending"&gt;⬜&lt;/span&gt;
+                  &lt;span&gt;Maximum daily loss not exceeded (2%)&lt;/span&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                  &lt;span class="objective-check objective-pending"&gt;⬜&lt;/span&gt;
+                  &lt;span&gt;Maximum drawdown maintained (10%)&lt;/span&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                  &lt;span class="objective-check objective-pending"&gt;⬜&lt;/span&gt;
+                  &lt;span&gt;No prohibited trading practices&lt;/span&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Risk Limits --&gt;
+            &lt;div class="card" style="margin-bottom: 1.5rem;"&gt;
+              &lt;div class="card-header"&gt;
+                &lt;div class="card-title"&gt;⚠️ Risk Limits&lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.9rem;"&gt;
+                &lt;div&gt;
+                  &lt;div style="color: var(--text-muted); font-size: 0.8rem;"&gt;Daily Loss Limit&lt;/div&gt;
+                  &lt;div style="font-weight: 600; color: var(--accent-yellow);"&gt;2.0% ($2,000)&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                  &lt;div style="color: var(--text-muted); font-size: 0.8rem;"&gt;Total Drawdown Limit&lt;/div&gt;
+                  &lt;div style="font-weight: 600; color: var(--accent-yellow);"&gt;10.0% ($10,000)&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                  &lt;div style="color: var(--text-muted); font-size: 0.8rem;"&gt;Max Leverage&lt;/div&gt;
+                  &lt;div style="font-weight: 600;"&gt;1:100&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                  &lt;div style="color: var(--text-muted); font-size: 0.8rem;"&gt;Min Trading Days&lt;/div&gt;
+                  &lt;div style="font-weight: 600;"&gt;10 days&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem;"&gt;
+                ⚠️ All limits are mock values for demonstration purposes only.
+              &lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Activity Panel --&gt;
+            &lt;div class="card"&gt;
+              &lt;div class="card-header"&gt;
+                &lt;div class="card-title"&gt;📋 Recent Activity&lt;/div&gt;
+              &lt;/div&gt;
+              &lt;ul class="activity-list"&gt;
+                &lt;li class="activity-item"&gt;
+                  &lt;span class="activity-time"&gt;2h ago&lt;/span&gt;
+                  &lt;span class="activity-text"&gt;✅ Trade closed: BUY EUR/USD, P/L +$420.00 &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/span&gt;
+                &lt;/li&gt;
+                &lt;li class="activity-item"&gt;
+                  &lt;span class="activity-time"&gt;3h ago&lt;/span&gt;
+                  &lt;span class="activity-text"&gt;📊 Login from desktop &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/span&gt;
+                &lt;/li&gt;
+                &lt;li class="activity-item"&gt;
+                  &lt;span class="activity-time"&gt;5h ago&lt;/span&gt;
+                  &lt;span class="activity-text"&gt;✅ Trade closed: SELL GBP/USD, P/L +$185.50 &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/span&gt;
+                &lt;/li&gt;
+                &lt;li class="activity-item"&gt;
+                  &lt;span class="activity-time"&gt;8h ago&lt;/span&gt;
+                  &lt;span class="activity-text"&gt;⚠️ Daily loss limit warning: 1.5% reached &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/span&gt;
+                &lt;/li&gt;
+                &lt;li class="activity-item"&gt;
+                  &lt;span class="activity-time"&gt;1d ago&lt;/span&gt;
+                  &lt;span class="activity-text"&gt;✅ Challenge phase 1 completed &lt;span class="mock-label"&gt;MOCK&lt;/span&gt;&lt;/span&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;!-- /Right Column --&gt;
+        &lt;/div&gt;
+        &lt;!-- /Two Column --&gt;
+
+      &lt;/main&gt;
+      &lt;!-- /Dashboard Content --&gt;
+    &lt;/div&gt;
+    &lt;!-- /Dashboard Layout --&gt;
+
+    &lt;!-- Footer --&gt;
+    &lt;footer class="site-footer"&gt;
+      &lt;p&gt;&amp;copy; 2026 Fusion FX Funded. &lt;a href="index.html"&gt;Back to Home&lt;/a&gt; — Demo prototype, no real trading.&lt;/p&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
