@@ -1,0 +1,81 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Sign In — Fusion FX Funded&lt;/title&gt;
+  &lt;link rel="stylesheet" href="app.css"&gt;
+  &lt;style&gt;
+    /* Page-specific overrides */
+    .auth-back-link { text-align: center; margin-bottom: 1.5rem; }
+    .auth-back-link a { color: var(--text-secondary); font-size: 0.9rem; }
+    .auth-back-link a:hover { color: var(--accent-green-light); }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="page-wrapper"&gt;
+    &lt;!-- Header with link to home --&gt;
+    &lt;header class="site-header"&gt;
+      &lt;div class="site-logo"&gt;
+        &lt;div class="site-logo-icon"&gt;FX&lt;/div&gt;
+        &lt;a href="index.html"&gt;Fusion FX Funded&lt;/a&gt;
+      &lt;/div&gt;
+      &lt;nav class="header-nav"&gt;
+        &lt;a href="index.html"&gt;Home&lt;/a&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main class="auth-page"&gt;
+      &lt;div class="auth-card"&gt;
+        &lt;p class="auth-back-link"&gt;&lt;a href="index.html"&gt;← Back to Home&lt;/a&gt;&lt;/p&gt;
+
+        &lt;h1 id="auth-title"&gt;Sign In&lt;/h1&gt;
+        &lt;p class="auth-subtitle"&gt;Access your trading dashboard&lt;/p&gt;
+
+        &lt;!-- Demo Notice --&gt;
+        &lt;div class="demo-notice"&gt;
+          &lt;span class="demo-notice-icon"&gt;⚠️&lt;/span&gt;
+          &lt;span&gt;&lt;strong&gt;Demo prototype&lt;/strong&gt; — No real account is created. This is a front-end-only prototype for demonstration purposes.&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;form id="auth-form" action="login" method="POST"&gt;
+          &lt;div class="form-group"&gt;
+            &lt;label class="form-label" for="auth-email"&gt;Email Address&lt;/label&gt;
+            &lt;input class="form-input" type="email" id="auth-email" name="email" placeholder="you@example.com" autocomplete="email"&gt;
+            &lt;div class="form-error"&gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div class="form-group"&gt;
+            &lt;label class="form-label" for="auth-password"&gt;Password&lt;/label&gt;
+            &lt;div class="password-wrapper"&gt;
+              &lt;input class="form-input" type="password" id="auth-password" name="password" placeholder="Enter your password" autocomplete="current-password"&gt;
+              &lt;button type="button" id="password-toggle" class="password-toggle" aria-label="Toggle password visibility"&gt;👁️&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="form-error"&gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;!-- Name field (hidden by default, shown on register) --&gt;
+          &lt;div class="form-group" id="auth-name-group" style="display: none;"&gt;
+            &lt;label class="form-label" for="auth-name"&gt;Full Name&lt;/label&gt;
+            &lt;input class="form-input" type="text" id="auth-name" name="name" placeholder="John Doe"&gt;
+            &lt;div class="form-error"&gt;&lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;button type="submit" class="btn btn-primary btn-lg" style="width: 100%;"&gt;Sign In&lt;/button&gt;
+        &lt;/form&gt;
+
+        &lt;p class="auth-toggle"&gt;
+          &lt;span id="mode-toggle"&gt;Don't have an account?&lt;/span&gt;
+          &lt;a href="javascript:void(0)" id="mode-toggle-link"&gt;Sign Up&lt;/a&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+
+    &lt;footer class="site-footer"&gt;
+      &lt;p&gt;&amp;copy; 2026 Fusion FX Funded. &lt;a href="index.html"&gt;Back to Home&lt;/a&gt;&lt;/p&gt;
+    &lt;/footer&gt;
+  &lt;/div&gt;
+
+  &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
