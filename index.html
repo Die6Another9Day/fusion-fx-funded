@@ -1,0 +1,878 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Fusion FX Funded — Trading Firm Prototype&lt;/title&gt;
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"&gt;
+    &lt;style&gt;
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-card: #16161e;
+            --bg-card-hover: #1c1c26;
+            --text-primary: #f0f0f5;
+            --text-secondary: #8a8a9a;
+            --text-muted: #5a5a6a;
+            --accent-red: #e63946;
+            --accent-red-light: #ff4d5a;
+            --accent-green: #00e676;
+            --accent-green-light: #69f0ae;
+            --border-color: #2a2a3a;
+            --gradient-red: linear-gradient(135deg, #e63946, #ff6b6b);
+            --gradient-green: linear-gradient(135deg, #00c853, #69f0ae);
+            --gradient-dark: linear-gradient(135deg, #0a0a0f, #1a1a2e);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 16px 0;
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo span {
+            color: var(--accent-green);
+            -webkit-text-fill-color: var(--accent-green);
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        .nav-cta {
+            padding: 10px 24px;
+            background: var(--gradient-red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.4);
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: 0.3s;
+        }
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(230, 57, 70, 0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 50%, rgba(0, 230, 118, 0.04) 0%, transparent 40%),
+                        var(--bg-primary);
+        }
+        .hero-content {
+            max-width: 800px;
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(230, 57, 70, 0.1);
+            border: 1px solid rgba(230, 57, 70, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent-red-light);
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+        .hero h1 .highlight {
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            padding: 16px 36px;
+            background: var(--gradient-red);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(230, 57, 70, 0.4);
+        }
+        .btn-secondary {
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover {
+            border-color: var(--accent-red);
+            background: rgba(230, 57, 70, 0.05);
+        }
+        /* DISCLAIMER BANNER */
+        .disclaimer-banner {
+            background: rgba(230, 57, 70, 0.08);
+            border: 1px solid rgba(230, 57, 70, 0.2);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+        .disclaimer-banner p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .disclaimer-banner strong {
+            color: var(--accent-red-light);
+        }
+        /* SECTION COMMON */
+        section {
+            padding: 100px 0;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .section-label {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0, 230, 118, 0.1);
+            border: 1px solid rgba(0, 230, 118, 0.2);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        /* ACCOUNT CARDS */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+        .account-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px 28px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .account-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-red);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .account-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(230, 57, 70, 0.3);
+            background: var(--bg-card-hover);
+        }
+        .account-card:hover::before {
+            opacity: 1;
+        }
+        .account-card.featured {
+            border-color: rgba(230, 57, 70, 0.4);
+            background: linear-gradient(180deg, rgba(230, 57, 70, 0.05), var(--bg-card));
+        }
+        .account-card.featured::before {
+            opacity: 1;
+        }
+        .card-size {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 4px;
+            background: var(--gradient-red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .card-features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .card-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card-features li span {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        .card-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .card-price-note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .card-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--gradient-red);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .card-btn:hover {
+            transform: scale(1.02);
+        }
+        /* WHY FUSION */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .why-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        .why-card:hover {
+            border-color: rgba(0, 230, 118, 0.3);
+            transform: translateY(-2px);
+        }
+        .why-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .why-icon.red {
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--accent-red-light);
+        }
+        .why-icon.green {
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--accent-green);
+        }
+        .why-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .why-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        /* RULES */
+        .rules-table {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .rules-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .rules-table th, .rules-table td {
+            padding: 18px 24px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .rules-table th {
+            background: rgba(255,255,255,0.02);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+        .rules-table td {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .rules-table td:last-child {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        .rules-table tr:last-child td {
+            border-bottom: none;
+        }
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 22px 28px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .faq-question:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.4rem;
+            color: var(--accent-green);
+            font-weight: 300;
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            padding: 0 28px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 28px 22px;
+            max-height: 300px;
+        }
+        /* CTA */
+        .cta-section {
+            background: radial-gradient(ellipse at 50% 50%, rgba(230, 57, 70, 0.06) 0%, transparent 70%),
+                        var(--bg-secondary);
+        }
+        .cta-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .cta-content h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .cta-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+        }
+        /* FOOTER */
+        footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            line-height: 1.7;
+        }
+        .footer-col h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .footer-col a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .footer-col a:hover {
+            color: var(--accent-green);
+        }
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 15, 0.98);
+                flex-direction: column;
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-cta-desktop {
+                display: none;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- NAVIGATION --&gt;
+    &lt;nav&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="logo"&gt;Fusion FX&lt;span&gt; Funded&lt;/span&gt;&lt;/div&gt;
+            &lt;ul class="nav-links" id="navLinks"&gt;
+                &lt;li&gt;&lt;a href="#accounts"&gt;Accounts&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#why"&gt;Why Fusion&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#rules"&gt;Rules&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#faq"&gt;FAQ&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;a href="#accounts" class="nav-cta nav-cta-desktop"&gt;Get Started&lt;/a&gt;
+            &lt;button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')" aria-label="Toggle menu"&gt;
+                &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- HERO --&gt;
+    &lt;section class="hero"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="hero-content"&gt;
+                &lt;div class="hero-badge"&gt;Prototype — Not Live&lt;/div&gt;
+                &lt;h1&gt;Trade Smarter with
+                    &lt;span class="highlight"&gt;Fusion FX Funded&lt;/span&gt;
+                &lt;/h1&gt;
+                &lt;p&gt;A concept landing page prototype. Illustrative designs and placeholder data only — no live accounts, payments, evaluations or payouts exist for this brand.&lt;/p&gt;
+                &lt;div class="disclaimer-banner"&gt;
+                    &lt;p&gt;&lt;strong>⚠ Prototype Only:&lt;/strong&gt; This website is a UI/UX design prototype. No trading accounts are available, no evaluations are conducted, and no real payouts or financial services are offered. All data shown is illustrative.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="hero-buttons"&gt;
+                    &lt;a href="#accounts" class="btn-primary"&gt;View Account Sizes&lt;/a&gt;
+                    &lt;a href="#why" class="btn-secondary"&gt;Learn More&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- ACCOUNT CARDS --&gt;
+    &lt;section id="accounts"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="section-header"&gt;
+                &lt;span class="section-label"&gt;Illustrative&lt;/span&gt;
+                &lt;h2&gt;Choose Your Challenge Account&lt;/h2&gt;
+                &lt;p&gt;Placeholder account tiers shown for prototype demonstration purposes only.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="cards-grid"&gt;
+                &lt;!-- 5K --&gt;
+                &lt;div class="account-card"&gt;
+                    &lt;div class="card-size"&gt;$5K&lt;/div&gt;
+                    &lt;div class="card-label"&gt;Starter Account&lt;/div&gt;
+                    &lt;ul class="card-features"&gt;
+                        &lt;li&gt;Target Profit &lt;span&gt;8%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Daily Drawdown &lt;span&gt;4%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Max Drawdown &lt;span&gt;8%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Profit Split &lt;span&gt;80%&lt;/span&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;div class="card-price"&gt;$49&lt;/div&gt;
+                    &lt;div class="card-price-note"&gt;one-time evaluation fee&lt;/div&gt;
+                    &lt;button class="card-btn"&gt;Get Started&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;!-- 25K --&gt;
+                &lt;div class="account-card featured"&gt;
+                    &lt;div class="card-size"&gt;$25K&lt;/div&gt;
+                    &lt;div class="card-label"&gt;Popular Account&lt;/div&gt;
+                    &lt;ul class="card-features"&gt;
+                        &lt;li&gt;Target Profit &lt;span&gt;8%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Daily Drawdown &lt;span&gt;4%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Max Drawdown &lt;span&gt;10%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Profit Split &lt;span&gt;85%&lt;/span&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;div class="card-price"&gt;$149&lt;/div&gt;
+                    &lt;div class="card-price-note"&gt;one-time evaluation fee&lt;/div&gt;
+                    &lt;button class="card-btn"&gt;Get Started&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;!-- 50K --&gt;
+                &lt;div class="account-card"&gt;
+                    &lt;div class="card-size"&gt;$50K&lt;/div&gt;
+                    &lt;div class="card-label"&gt;Advanced Account&lt;/div&gt;
+                    &lt;ul class="card-features"&gt;
+                        &lt;li&gt;Target Profit &lt;span&gt;8%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Daily Drawdown &lt;span&gt;5%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Max Drawdown &lt;span&gt;10%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Profit Split &lt;span&gt;85%&lt;/span&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;div class="card-price"&gt;$249&lt;/div&gt;
+                    &lt;div class="card-price-note"&gt;one-time evaluation fee&lt;/div&gt;
+                    &lt;button class="card-btn"&gt;Get Started&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;!-- 100K --&gt;
+                &lt;div class="account-card"&gt;
+                    &lt;div class="card-size"&gt;$100K&lt;/div&gt;
+                    &lt;div class="card-label"&gt;Elite Account&lt;/div&gt;
+                    &lt;ul class="card-features"&gt;
+                        &lt;li&gt;Target Profit &lt;span&gt;10%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Daily Drawdown &lt;span&gt;5%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Max Drawdown &lt;span&gt;10%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Profit Split &lt;span&gt;90%&lt;/span&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;div class="card-price"&gt;$399&lt;/div&gt;
+                    &lt;div class="card-price-note"&gt;one-time evaluation fee&lt;/div&gt;
+                    &lt;button class="card-btn"&gt;Get Started&lt;/button&gt;
+                &lt;/div&gt;
+                &lt;!-- 200K --&gt;
+                &lt;div class="account-card"&gt;
+                    &lt;div class="card-size"&gt;$200K&lt;/div&gt;
+                    &lt;div class="card-label"&gt;Professional Account&lt;/div&gt;
+                    &lt;ul class="card-features"&gt;
+                        &lt;li&gt;Target Profit &lt;span&gt;10%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Daily Drawdown &lt;span&gt;5%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Max Drawdown &lt;span&gt;10%&lt;/span&gt;&lt;/li&gt;
+                        &lt;li&gt;Profit Split &lt;span&gt;90%&lt;/span&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                    &lt;div class="card-price"&gt;$699&lt;/div&gt;
+                    &lt;div class="card-price-note"&gt;one-time evaluation fee&lt;/div&gt;
+                    &lt;button class="card-btn"&gt;Get Started&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- WHY FUSION --&gt;
+    &lt;section id="why" style="background: var(--bg-secondary);"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="section-header"&gt;
+                &lt;span class="section-label"&gt;Prototype Concept&lt;/span&gt;
+                &lt;h2&gt;Why Choose Fusion FX Funded?&lt;/h2&gt;
+                &lt;p&gt;Illustrative features described for this design prototype only.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="why-grid"&gt;
+                &lt;div class="why-card"&gt;
+                    &lt;div class="why-icon red"&gt;⚡&lt;/div&gt;
+                    &lt;h3&gt;Fast Payouts&lt;/h3&gt;
+                    &lt;p&gt;Placeholder: Withdraw profits within 24 hours after passing the evaluation phase. Illustrative only.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="why-card"&gt;
+                    &lt;div class="why-icon green"&gt;📊&lt;/div&gt;
+                    &lt;h3&gt;Advanced Analytics&lt;/h3&gt;
+                    &lt;p&gt;Placeholder: Real-time dashboard with trade analytics, performance metrics, and risk reports. UI concept only.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="why-card"&gt;
+                    &lt;div class="why-icon red"&gt;🛡️&lt;/div&gt;
+                    &lt;h3&gt;Risk Management&lt;/div&gt;
+                    &lt;p&gt;Placeholder: Built-in risk controls and trailing drawdown protection to help manage positions.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="why-card"&gt;
+                    &lt;div class="why-icon green"&gt;🎓&lt;/div&gt;
+                    &lt;h3&gt;Education Hub&lt;/h3&gt;
+                    &lt;p&gt;Placeholder: Access courses, webinars, and trading guides. Concept feature for the prototype.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="why-card"&gt;
+                    &lt;div class="why-icon red"&gt;💬&lt;/div&gt;
+                    &lt;h3&gt;24/7 Support&lt;/h3&gt;
+                    &lt;p&gt;Placeholder: Dedicated support team available around the clock via live chat and email.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="why-card"&gt;
+                    &lt;div class="why-icon green"&gt;🌍&lt;/div&gt;
+                    &lt;h3&gt;Global Access&lt;/h3&gt;
+                    &lt;p&gt;Placeholder: Available to traders worldwide with multi-currency support and regional pricing.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- RULES --&gt;
+    &lt;section id="rules"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="section-header"&gt;
+                &lt;span class="section-label"&gt;Illustrative Data&lt;/span&gt;
+                &lt;h2&gt;Sample Trading Rules&lt;/h2&gt;
+                &lt;p&gt;Placeholder rules shown for prototype demonstration. Not real trading conditions.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="rules-table"&gt;
+                &lt;table&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;Rule&lt;/th&gt;
+                            &lt;th&gt;Description&lt;/th&gt;
+                            &lt;th&gt;Value&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                        &lt;tr&gt;&lt;td&gt;Profit Target&lt;/td&gt;&lt;td&gt;Performance goal to pass evaluation&lt;/td&gt;&lt;td&gt;8–10%&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;Daily Drawdown&lt;/td&gt;&lt;td&gt;Maximum loss per trading day&lt;/td&gt;&lt;td&gt;4–5%&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;Max Drawdown&lt;/td&gt;&lt;td&gt;Maximum cumulative loss allowed&lt;/td&gt;&lt;td&gt;8–10%&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;Minimum Trading Days&lt;/td&gt;&lt;td&gt;Required trading days in phase&lt;/td&gt;&lt;td&gt;10 days&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;Profit Split&lt;/td&gt;&lt;td&gt;Percentage of profits retained&lt;/td&gt;&lt;td&gt;80–90%&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;Leverage&lt;/td&gt;&lt;td&gt;Maximum leverage ratio available&lt;/td&gt;&lt;td&gt;1:100&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;Holding Overnight&lt;/td&gt;&lt;td&gt;Positions held beyond daily close&lt;/td&gt;&lt;td&gt;Allowed&lt;/td&gt;&lt;/tr&gt;
+                        &lt;tr&gt;&lt;td&gt;News Trading&lt;/td&gt;&lt;td&gt;Trading during high-impact news&lt;/td&gt;&lt;td&gt;Allowed with restrictions&lt;/td&gt;&lt;/tr&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- FAQ --&gt;
+    &lt;section id="faq" style="background: var(--bg-secondary);"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="section-header"&gt;
+                &lt;span class="section-label"&gt;Frequently Asked&lt;/span&gt;
+                &lt;h2&gt;Prototype FAQ&lt;/h2&gt;
+                &lt;p&gt;Placeholder questions and answers for this design concept.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class="faq-list"&gt;
+                &lt;div class="faq-item"&gt;
+                    &lt;div class="faq-question" onclick="this.parentElement.classList.toggle('active')"&gt;What is Fusion FX Funded?&lt;/div&gt;
+                    &lt;div class="faq-answer"&gt;&lt;strong&gt;Prototype Only:&lt;/strong&gt; This is a UI/UX design concept. No actual trading firm exists under this name at this time. All descriptions are illustrative placeholders.&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="faq-item"&gt;
+                    &lt;div class="faq-question" onclick="this.parentElement.classList.toggle('active')"&gt;Can I sign up for an account?&lt;/div&gt;
+                    &lt;div class="faq-answer"&gt;&lt;strong&gt;No.&lt;/strong&gt; This website is a design prototype. No accounts, evaluations, or sign-ups are available or functional.&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="faq-item"&gt;
+                    &lt;div class="faq-question" onclick="this.parentElement.classList.toggle('active')"&gt;Are the prices real?&lt;/div&gt;
+                    &lt;div class="faq-answer"&gt;&lt;strong&gt;No.&lt;/strong&gt; All prices, profit targets, drawdown limits, and rules shown on this page are fictional placeholders created for the prototype design.&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="faq-item"&gt;
+                    &lt;div class="faq-question" onclick="this.parentElement.classList.toggle('active')"&gt;Are payouts guaranteed?&lt;/div&gt;
+                    &lt;div class="faq-answer"&gt;&lt;strong&gt;No payouts exist.&lt;/strong&gt; This is purely a design mockup. No financial services, payouts, or evaluations are offered by this entity.&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="faq-item"&gt;
+                    &lt;div class="faq-question" onclick="this.parentElement.classList.toggle('active')"&gt;Who is this prototype for?&lt;/div&gt;
+                    &lt;div class="faq-answer"&gt;&lt;strong&gt;Designers and developers.&lt;/strong&gt; This prototype demonstrates what a premium fintech landing page could look like for a conceptual trading firm brand.&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- CTA --&gt;
+    &lt;section id="contact" class="cta-section"&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="cta-content"&gt;
+                &lt;h2&gt;Ready to Get Started?&lt;/h2&gt;
+                &lt;p&gt;&lt;strong&gt;Prototype Notice:&lt;/strong&gt; This call-to-action is part of the design concept. No live service, registration, or payment is available at this time.&lt;/p&gt;
+                &lt;a href="mailto:contact@example.com" class="btn-primary"&gt;Contact Us (Prototype)&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- FOOTER --&gt;
+    &lt;footer&gt;
+        &lt;div class="container"&gt;
+            &lt;div class="footer-grid"&gt;
+                &lt;div class="footer-brand"&gt;
+                    &lt;div class="logo"&gt;Fusion FX&lt;span&gt; Funded&lt;/span&gt;&lt;/div&gt;
+                    &lt;p&gt;This is a design prototype only. No real trading services, accounts, or financial products are offered. All content is illustrative.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="footer-col"&gt;
+                    &lt;h4&gt;Accounts&lt;/h4&gt;
+                    &lt;a href="#accounts"&gt;$5K Starter&lt;/a&gt;
+                    &lt;a href="#accounts"&gt;$25K Popular&lt;/a&gt;
+                    &lt;a href="#accounts"&gt;$50K Advanced&lt;/a&gt;
+                    &lt;a href="#accounts"&gt;$100K Elite&lt;/a&gt;
+                    &lt;a href="#accounts"&gt;$200K Pro&lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class="footer-col"&gt;
+                    &lt;h4&gt;Resources&lt;/h4&gt;
+                    &lt;a href="#rules"&gt;Trading Rules&lt;/a&gt;
+                    &lt;a href="#faq"&gt;FAQ&lt;/a&gt;
+                    &lt;a href="#why"&gt;Why Fusion&lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class="footer-col"&gt;
+                    &lt;h4&gt;Legal&lt;/h4&gt;
+                    &lt;a href="#"&gt;Privacy Policy&lt;/a&gt;
+                    &lt;a href="#"&gt;Terms of Service&lt;/a&gt;
+                    &lt;a href="#"&gt;Risk Disclosure&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="footer-bottom"&gt;
+                &lt;p&gt;&lt;strong&gt;Prototype — Not a Real Service&lt;/strong&gt; — No accounts, evaluations, payments, or payouts are live. All data shown is illustrative placeholder content.&lt;/p&gt;
+                &lt;p&gt;&amp;copy; 2026 Fusion FX Funded (Prototype). All rights reserved.&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
